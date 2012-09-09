@@ -1,231 +1,587 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Twitter Bootstrap</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- Le styles -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="assets/css/docs.css" rel="stylesheet">
-    <link href="assets/js/google-code-prettify/prettify.css" rel="stylesheet">
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="assets/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
-
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-146052-10']);
-      _gaq.push(['_trackPageview']);
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
-  </head>
-
-  <body data-spy="scroll" data-target=".bs-docs-sidebar">
-
-    <!-- Navbar
-    ================================================== -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
+    <head>
+        <title>Draggable Image Boxes Grid</title>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="Draggable Image Boxes Grid" />
+        <meta name="keywords" content="images, boxes, template, thumbnail, css3, transition, jquery, template, fullscreen, grid, draggable" />
+        <meta name="author" content="Codrops" />
+        <link rel="shortcut icon" href="../favicon.ico"> 
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+		<noscript>
+			<style>
+				.ib-main a{
+					cursor:pointer;
+				}
+				.ib-main-wrapper{
+					position:absolute;
+					top:0px;
+					bottom:24px;
+					overflow:scroll;
+				}
+			</style>
+		</noscript>
+        <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
+		<script id="previewTmpl" type="text/x-jquery-tmpl">
+			<div id="ib-img-preview" class="ib-preview">
+                <img src="${src}" alt="" class="ib-preview-img"/>
+                <span class="ib-preview-descr" style="display:none;">${description}</span>
+                <div class="ib-nav" style="display:none;">
+                    <span class="ib-nav-prev">Previous</span>
+                    <span class="ib-nav-next">Next</span>
+                </div>
+                <span class="ib-close" style="display:none;">Close Preview</span>
+                <div class="ib-loading-large" style="display:none;">Loading...</div>
+            </div>		
+		</script>
+		<script id="contentTmpl" type="text/x-jquery-tmpl">	
+			<div id="ib-content-preview" class="ib-content-preview">
+                <div class="ib-teaser" style="display:none;">{{html teaser}}</div>
+                <div class="ib-content-full" style="display:none;">{{html content}}</div>
+                <span class="ib-close" style="display:none;">Close Preview</span>
+            </div>
+		</script>	
+    </head>
+    <body>
         <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="./index.html">Bootstrap</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="active">
-                <a href="./index.html">Home</a>
-              </li>
-              <li class="">
-                <a href="./getting-started.html">Get started</a>
-              </li>
-              <li class="">
-                <a href="./scaffolding.html">Scaffolding</a>
-              </li>
-              <li class="">
-                <a href="./base-css.html">Base CSS</a>
-              </li>
-              <li class="">
-                <a href="./components.html">Components</a>
-              </li>
-              <li class="">
-                <a href="./javascript.html">Javascript</a>
-              </li>
-              <li class="">
-                <a href="./customize.html">Customize</a>
-              </li>
-            </ul>
-          </div>
+            <div id="header" class="header">
+                <a href="http://tympanus.net/Tutorials/ScrollbarVisibility/"><span>&laquo; Previous Demo: </span>Scrollbar Visibility</a>
+                <span class="right_ab">
+					<a href="http://www.flickr.com/people/notsogoodphotography/" target="_blank">Images by <strong>Ibrahim Iujaz</strong></a>
+                    <a href="http://creativecommons.org/licenses/by/2.0/deed.en_GB" target="_blank">CC BY 2.0</a>
+					<a href="http://tympanus.net/codrops/2011/10/07/draggable-image-boxes-grid/"><strong>Back to the Codrops Article</strong></a>
+                </span>
+            </div>
+            <div id="ib-top" class="ib-top">
+                <h1>Draggable Image Boxes Grid <span>with jQuery</span></h1>
+            </div>
+            <div id="ib-main-wrapper" class="ib-main-wrapper">
+                <div class="ib-main">
+                    <a href="#"><img src="images/thumbs/1.jpg" data-largesrc="images/large/1.jpg" alt="image01"/><span>Crabbed Age and Youth</span></a>
+					<a href="#"><img src="images/thumbs/2.jpg" data-largesrc="images/large/2.jpg" alt="image02"/><span>Cannot live together</span></a>
+					<a href="#" class="ib-content">
+                        <div class="ib-teaser">
+                            <h2>Welcome <span>Howdy, Stranger</span></h2>
+                        </div>
+                        <div class="ib-content-full">
+                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+                        </div>
+                    </a>
+					<a href="#"><img src="images/thumbs/3.jpg" data-largesrc="images/large/3.jpg" alt="image03"/><span>Youth is full of pleasance</span></a>
+					<a href="#"><img src="images/thumbs/1.jpg" data-largesrc="images/large/1.jpg" alt="image01"/><span>Crabbed Age and Youth</span></a>
+					<a href="#"><img src="images/thumbs/2.jpg" data-largesrc="images/large/2.jpg" alt="image02"/><span>Cannot live together</span></a>
+					<a href="#"><img src="images/thumbs/3.jpg" data-largesrc="images/large/3.jpg" alt="image03"/><span>Youth is full of pleasance</span></a>
+					<a href="#"><img src="images/thumbs/1.jpg" data-largesrc="images/large/1.jpg" alt="image01"/><span>Crabbed Age and Youth</span></a>
+					<a href="#"><img src="images/thumbs/2.jpg" data-largesrc="images/large/2.jpg" alt="image02"/><span>Cannot live together</span></a>
+					<a href="#"><img src="images/thumbs/3.jpg" data-largesrc="images/large/3.jpg" alt="image03"/><span>Youth is full of pleasance</span></a>
+					<a href="#"><img src="images/thumbs/1.jpg" data-largesrc="images/large/1.jpg" alt="image01"/><span>Crabbed Age and Youth</span></a>
+					<a href="#"><img src="images/thumbs/2.jpg" data-largesrc="images/large/2.jpg" alt="image02"/><span>Cannot live together</span></a>
+					<a href="#" class="ib-content">
+                        <div class="ib-teaser">
+                            <h2>Welcome <span>Howdy, Stranger</span></h2>
+                        </div>
+                        <div class="ib-content-full">
+                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+                        </div>
+                    </a>
+					<a href="#"><img src="images/thumbs/3.jpg" data-largesrc="images/large/3.jpg" alt="image03"/><span>Youth is full of pleasance</span></a>
+					<a href="#"><img src="images/thumbs/1.jpg" data-largesrc="images/large/1.jpg" alt="image01"/><span>Crabbed Age and Youth</span></a>
+					<a href="#"><img src="images/thumbs/2.jpg" data-largesrc="images/large/2.jpg" alt="image02"/><span>Cannot live together</span></a>
+					<a href="#"><img src="images/thumbs/3.jpg" data-largesrc="images/large/3.jpg" alt="image03"/><span>Youth is full of pleasance</span></a>
+					<a href="#"><img src="images/thumbs/1.jpg" data-largesrc="images/large/1.jpg" alt="image01"/><span>Crabbed Age and Youth</span></a>
+					<a href="#"><img src="images/thumbs/2.jpg" data-largesrc="images/large/2.jpg" alt="image02"/><span>Cannot live together</span></a>
+					<a href="#"><img src="images/thumbs/3.jpg" data-largesrc="images/large/3.jpg" alt="image03"/><span>Youth is full of pleasance</span></a>
+					<a href="#"><img src="images/thumbs/1.jpg" data-largesrc="images/large/1.jpg" alt="image01"/><span>Crabbed Age and Youth</span></a>
+					<a href="#"><img src="images/thumbs/2.jpg" data-largesrc="images/large/2.jpg" alt="image02"/><span>Cannot live together</span></a>
+					<a href="#"><img src="images/thumbs/3.jpg" data-largesrc="images/large/3.jpg" alt="image03"/><span>Youth is full of pleasance</span></a>
+					<a href="#"><img src="images/thumbs/1.jpg" data-largesrc="images/large/1.jpg" alt="image01"/><span>Crabbed Age and Youth</span></a>
+					<a href="#"><img src="images/thumbs/2.jpg" data-largesrc="images/large/2.jpg" alt="image02"/><span>Cannot live together</span></a>
+					<a href="#"><img src="images/thumbs/3.jpg" data-largesrc="images/large/3.jpg" alt="image03"/><span>Youth is full of pleasance</span></a>
+					<a href="#"><img src="images/thumbs/1.jpg" data-largesrc="images/large/1.jpg" alt="image01"/><span>Crabbed Age and Youth</span></a>
+					<a href="#"><img src="images/thumbs/2.jpg" data-largesrc="images/large/2.jpg" alt="image02"/><span>Cannot live together</span></a>
+					<a href="#"><img src="images/thumbs/3.jpg" data-largesrc="images/large/3.jpg" alt="image03"/><span>Youth is full of pleasance</span></a>
+					<a href="#"><img src="images/thumbs/1.jpg" data-largesrc="images/large/1.jpg" alt="image01"/><span>Crabbed Age and Youth</span></a>
+					<a href="#"><img src="images/thumbs/2.jpg" data-largesrc="images/large/2.jpg" alt="image02"/><span>Cannot live together</span></a>
+					<a href="#"><img src="images/thumbs/3.jpg" data-largesrc="images/large/3.jpg" alt="image03"/><span>Youth is full of pleasance</span></a>
+					<a href="#"><img src="images/thumbs/1.jpg" data-largesrc="images/large/1.jpg" alt="image01"/><span>Crabbed Age and Youth</span></a>
+					<a href="#"><img src="images/thumbs/2.jpg" data-largesrc="images/large/2.jpg" alt="image02"/><span>Cannot live together</span></a>
+					<a href="#"><img src="images/thumbs/3.jpg" data-largesrc="images/large/3.jpg" alt="image03"/><span>Youth is full of pleasance</span></a>
+					<a href="#"><img src="images/thumbs/1.jpg" data-largesrc="images/large/1.jpg" alt="image01"/><span>Crabbed Age and Youth</span></a>
+					<a href="#"><img src="images/thumbs/2.jpg" data-largesrc="images/large/2.jpg" alt="image02"/><span>Cannot live together</span></a>
+					<a href="#"><img src="images/thumbs/3.jpg" data-largesrc="images/large/3.jpg" alt="image03"/><span>Youth is full of pleasance</span></a>
+					<a href="#"><img src="images/thumbs/1.jpg" data-largesrc="images/large/1.jpg" alt="image01"/><span>Crabbed Age and Youth</span></a>
+					<a href="#"><img src="images/thumbs/2.jpg" data-largesrc="images/large/2.jpg" alt="image02"/><span>Cannot live together</span></a>
+					<a href="#"><img src="images/thumbs/3.jpg" data-largesrc="images/large/3.jpg" alt="image03"/><span>Youth is full of pleasance</span></a>
+					<a href="#"><img src="images/thumbs/1.jpg" data-largesrc="images/large/1.jpg" alt="image01"/><span>Crabbed Age and Youth</span></a>
+					<a href="#"><img src="images/thumbs/2.jpg" data-largesrc="images/large/2.jpg" alt="image02"/><span>Cannot live together</span></a>
+					<a href="#"><img src="images/thumbs/3.jpg" data-largesrc="images/large/3.jpg" alt="image03"/><span>Youth is full of pleasance</span></a>
+					<a href="#"><img src="images/thumbs/1.jpg" data-largesrc="images/large/1.jpg" alt="image01"/><span>Crabbed Age and Youth</span></a>
+					<a href="#"><img src="images/thumbs/2.jpg" data-largesrc="images/large/2.jpg" alt="image02"/><span>Cannot live together</span></a>
+					<a href="#"><img src="images/thumbs/3.jpg" data-largesrc="images/large/3.jpg" alt="image03"/><span>Youth is full of pleasance</span></a>
+					<a href="#"><img src="images/thumbs/1.jpg" data-largesrc="images/large/1.jpg" alt="image01"/><span>Crabbed Age and Youth</span></a>
+					<a href="#"><img src="images/thumbs/2.jpg" data-largesrc="images/large/2.jpg" alt="image02"/><span>Cannot live together</span></a>
+					<a href="#"><img src="images/thumbs/3.jpg" data-largesrc="images/large/3.jpg" alt="image03"/><span>Youth is full of pleasance</span></a>
+					<a href="#"><img src="images/thumbs/1.jpg" data-largesrc="images/large/1.jpg" alt="image01"/><span>Crabbed Age and Youth</span></a>
+					<a href="#"><img src="images/thumbs/2.jpg" data-largesrc="images/large/2.jpg" alt="image02"/><span>Cannot live together</span></a>
+					<a href="#"><img src="images/thumbs/3.jpg" data-largesrc="images/large/3.jpg" alt="image03"/><span>Youth is full of pleasance</span></a>
+					<a href="#"><img src="images/thumbs/2.jpg" data-largesrc="images/large/2.jpg" alt="image02"/><span>Cannot live together</span></a>
+					<a href="#"><img src="images/thumbs/3.jpg" data-largesrc="images/large/3.jpg" alt="image03"/><span>Youth is full of pleasance</span></a>
+					<a href="#"><img src="images/thumbs/1.jpg" data-largesrc="images/large/1.jpg" alt="image01"/><span>Crabbed Age and Youth</span></a>
+					<a href="#"><img src="images/thumbs/2.jpg" data-largesrc="images/large/2.jpg" alt="image02"/><span>Cannot live together</span></a>
+					<a href="#"><img src="images/thumbs/3.jpg" data-largesrc="images/large/3.jpg" alt="image03"/><span>Youth is full of pleasance</span></a>
+					<a href="#"><img src="images/thumbs/1.jpg" data-largesrc="images/large/1.jpg" alt="image01"/><span>Crabbed Age and Youth</span></a>
+					<a href="#"><img src="images/thumbs/2.jpg" data-largesrc="images/large/2.jpg" alt="image02"/><span>Cannot live together</span></a>
+					<a href="#"><img src="images/thumbs/3.jpg" data-largesrc="images/large/3.jpg" alt="image03"/><span>Youth is full of pleasance</span></a>
+					<div class="clr"></div>
+				</div><!-- ib-main -->
+            </div><!-- ib-main-wrapper -->
         </div>
-      </div>
-    </div>
-
-<div class="jumbotron masthead">
-  <div class="container">
-    <h1>Bootstrap</h1>
-    <p>Sleek, intuitive, and powerful front-end framework for faster and easier web development.</p>
-    <p><a href="assets/bootstrap.zip" class="btn btn-primary btn-large" onclick="_gaq.push(['_trackEvent', 'Jumbotron actions', 'Download', 'Download 2.1.1']);">Download Bootstrap</a></p>
-    <ul class="masthead-links">
-      <li><a href="http://github.com/twitter/bootstrap" onclick="_gaq.push(['_trackEvent', 'Jumbotron actions', 'Jumbotron links', 'GitHub project']);">GitHub project</a></li>
-      <li><a href="./extend.html" onclick="_gaq.push(['_trackEvent', 'Jumbotron actions', 'Jumbotron links', 'Extend']);">Extend</a></li>
-      <li>Version 2.1.1</li>
-    </ul>
-  </div>
-</div>
-
-<div class="bs-docs-social">
-  <div class="container">
-    <ul class="bs-docs-social-buttons">
-      <li>
-        <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=twitter&repo=bootstrap&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
-      </li>
-      <li>
-        <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=twitter&repo=bootstrap&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="98px" height="20px"></iframe>
-      </li>
-      <li class="follow-btn">
-        <a href="https://twitter.com/twbootstrap" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @twbootstrap</a>
-      </li>
-      <li class="tweet-btn">
-        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://twitter.github.com/bootstrap/" data-count="horizontal" data-via="twbootstrap" data-related="mdo:Creator of Twitter Bootstrap">Tweet</a>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<div class="container">
-
-  <div class="marketing">
-
-    <h1>Introducing Bootstrap.</h1>
-    <p class="marketing-byline">Need reasons to love Bootstrap? Look no further.</p>
-
-    <div class="row-fluid">
-      <div class="span4">
-        <img src="assets/img/bs-docs-twitter-github.png">
-        <h2>By nerds, for nerds.</h2>
-        <p>Built at Twitter by <a href="http://twitter.com/mdo">@mdo</a> and <a href="http://twitter.com/fat">@fat</a>, Bootstrap utilizes <a href="http://lesscss.org">LESS CSS</a>, is compiled via <a href="http://nodejs.org">Node</a>, and is managed through <a href="http://github.com">GitHub</a> to help nerds do awesome stuff on the web.</p>
-      </div>
-      <div class="span4">
-        <img src="assets/img/bs-docs-responsive-illustrations.png">
-        <h2>Made for everyone.</h2>
-        <p>Bootstrap was made to not only look and behave great in the latest desktop browsers (as well as IE7!), but in tablet and smartphone browsers via <a href="./scaffolding.html#responsive">responsive CSS</a> as well.</p>
-      </div>
-      <div class="span4">
-        <img src="assets/img/bs-docs-bootstrap-features.png">
-        <h2>Packed with features.</h2>
-        <p>A 12-column responsive <a href="./scaffolding.html#grid">grid</a>, dozens of components, <a href="./javascript.html">javascript plugins</a>, typography, form controls, and even a <a href="./customize.html">web-based Customizer</a> to make Bootstrap your own.</p>
-      </div>
-    </div>
-
-    <hr class="soften">
-
-    <h1>Built with Bootstrap.</h1>
-    <p class="marketing-byline">For even more sites built with Bootstrap, <a href="http://builtwithbootstrap.tumblr.com/" target="_blank">visit the unofficial Tumblr</a> or <a href="./getting-started.html#examples">browse the examples</a>.</p>
-    <div class="row-fluid">
-      <ul class="thumbnails example-sites">
-        <li class="span3">
-          <a class="thumbnail" href="http://soundready.fm/" target="_blank">
-            <img src="assets/img/example-sites/soundready.png" alt="SoundReady.fm">
-          </a>
-        </li>
-        <li class="span3">
-          <a class="thumbnail" href="http://kippt.com/" target="_blank">
-            <img src="assets/img/example-sites/kippt.png" alt="Kippt">
-          </a>
-        </li>
-        <li class="span3">
-          <a class="thumbnail" href="http://www.fleetio.com/" target="_blank">
-            <img src="assets/img/example-sites/fleetio.png" alt="Fleetio">
-          </a>
-        </li>
-        <li class="span3">
-          <a class="thumbnail" href="http://www.jshint.com/" target="_blank">
-            <img src="assets/img/example-sites/jshint.png" alt="JS Hint">
-          </a>
-        </li>
-      </ul>
-     </div>
-
-  </div>
-
-</div>
-
-
-
-    <!-- Footer
-    ================================================== -->
-    <footer class="footer">
-      <div class="container">
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>Designed and built with all the love in the world <a href="http://twitter.com/twitter" target="_blank">@twitter</a> by <a href="http://twitter.com/mdo" target="_blank">@mdo</a> and <a href="http://twitter.com/fat" target="_blank">@fat</a>.</p>
-        <p>Code licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>. Documentation licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
-        <p>Icons from <a href="http://glyphicons.com">Glyphicons Free</a>, licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
-        <ul class="footer-links">
-          <li><a href="http://blog.getbootstrap.com">Read the blog</a></li>
-          <li><a href="https://github.com/twitter/bootstrap/issues?state=open">Submit issues</a></li>
-          <li><a href="https://github.com/twitter/bootstrap/wiki">Roadmap and changelog</a></li>
-        </ul>
-      </div>
-    </footer>
-
-
-
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/google-code-prettify/prettify.js"></script>
-    <script src="assets/js/bootstrap-transition.js"></script>
-    <script src="assets/js/bootstrap-alert.js"></script>
-    <script src="assets/js/bootstrap-modal.js"></script>
-    <script src="assets/js/bootstrap-dropdown.js"></script>
-    <script src="assets/js/bootstrap-scrollspy.js"></script>
-    <script src="assets/js/bootstrap-tab.js"></script>
-    <script src="assets/js/bootstrap-tooltip.js"></script>
-    <script src="assets/js/bootstrap-popover.js"></script>
-    <script src="assets/js/bootstrap-button.js"></script>
-    <script src="assets/js/bootstrap-collapse.js"></script>
-    <script src="assets/js/bootstrap-carousel.js"></script>
-    <script src="assets/js/bootstrap-typeahead.js"></script>
-    <script src="assets/js/bootstrap-affix.js"></script>
-    <script src="assets/js/application.js"></script>
-
-
-    <!-- Analytics
-    ================================================== -->
-    <script>
-      var _gauges = _gauges || [];
-      (function() {
-        var t   = document.createElement('script');
-        t.type  = 'text/javascript';
-        t.async = true;
-        t.id    = 'gauges-tracker';
-        t.setAttribute('data-site-id', '4f0dc9fef5a1f55508000013');
-        t.src = '//secure.gaug.es/track.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(t, s);
-      })();
-    </script>
-
-  </body>
-</html>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.tmpl.min.js"></script>
+        <script type="text/javascript" src="js/jquery.kinetic.js"></script>
+		<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+        <script type="text/javascript">
+            $(function() {
+			
+				var $ibWrapper	= $('#ib-main-wrapper'),
+				 
+					Template	= (function() {
+							
+							// true if dragging the container
+						var kinetic_moving				= false,
+							// current index of the opened item
+							current						= -1,
+							// true if the item is being opened / closed
+							isAnimating					= false,
+							// items on the grid
+							$ibItems					= $ibWrapper.find('div.ib-main > a'),
+							// image items on the grid
+							$ibImgItems					= $ibItems.not('.ib-content'),
+							// total image items on the grid
+							imgItemsCount				= $ibImgItems.length,
+							init						= function() {
+								
+								// add a class ib-image to the image items
+								$ibImgItems.addClass('ib-image');
+								// apply the kinetic plugin to the wrapper
+								loadKinetic();
+								// load some events
+								initEvents();
+						
+							},
+							loadKinetic					= function() {
+								
+								setWrapperSize();
+								
+								$ibWrapper.kinetic({
+									moved	: function() {
+										
+										kinetic_moving = true;
+										
+									},
+									stopped	: function() {
+										
+										kinetic_moving = false;
+										
+									}
+								});
+								
+							},
+							setWrapperSize				= function() {
+								
+								var containerMargins	= $('#ib-top').outerHeight(true) + $('#header').outerHeight(true) + parseFloat( $ibItems.css('margin-top') );
+								$ibWrapper.css( 'height', $(window).height() - containerMargins )
+								
+							},
+							initEvents					= function() {
+							
+								// open the item only if not dragging the container
+								$ibItems.bind('click.ibTemplate', function( event ) {
+									
+									if( !kinetic_moving )
+										openItem( $(this) );
+								
+									return false;	
+								
+								});
+								
+								// on window resize, set the wrapper and preview size accordingly
+								$(window).bind('resize.ibTemplate', function( event ) {
+									
+									setWrapperSize();
+									
+									$('#ib-img-preview, #ib-content-preview').css({
+										width	: $(window).width(),
+										height	: $(window).height()
+									})
+									
+								});
+							
+							},
+							openItem					= function( $item ) {
+								
+								if( isAnimating ) return false;
+								
+								// if content item
+								if( $item.hasClass('ib-content') ) {
+									
+									isAnimating	= true;
+									current	= $item.index('.ib-content');
+									loadContentItem( $item, function() { isAnimating = false; } );
+									
+								}
+								// if image item
+								else {
+								
+									isAnimating	= true;
+									current	= $item.index('.ib-image');
+									loadImgPreview( $item, function() { isAnimating = false; } );
+									
+								}
+								
+							},
+							// opens one image item (fullscreen)
+							loadImgPreview				= function( $item, callback ) {
+								
+								var largeSrc		= $item.children('img').data('largesrc'),
+									description		= $item.children('span').text(),
+									largeImageData	= {
+										src			: largeSrc,
+										description	: description
+									};
+								
+								// preload large image
+								$item.addClass('ib-loading');
+								
+								preloadImage( largeSrc, function() {
+									
+									$item.removeClass('ib-loading');
+									
+									var hasImgPreview	= ( $('#ib-img-preview').length > 0 );
+									
+									if( !hasImgPreview )
+										$('#previewTmpl').tmpl( largeImageData ).insertAfter( $ibWrapper );
+									else
+										$('#ib-img-preview').children('img.ib-preview-img')
+															.attr( 'src', largeSrc )
+															.end()
+															.find('span.ib-preview-descr')
+															.text( description );
+										
+									//get dimentions for the image, based on the windows size
+									var	dim	= getImageDim( largeSrc );
+									
+									$item.removeClass('ib-img-loading');
+									
+									//set the returned values and show/animate preview
+									$('#ib-img-preview').css({
+										width	: $item.width(),
+										height	: $item.height(),
+										left	: $item.offset().left,
+										top		: $item.offset().top
+									}).children('img.ib-preview-img').hide().css({
+										width	: dim.width,
+										height	: dim.height,
+										left	: dim.left,
+										top		: dim.top
+									}).fadeIn( 400 ).end().show().animate({
+										width	: $(window).width(),
+										left	: 0
+									}, 500, 'easeOutExpo', function() {
+									
+										$(this).animate({
+											height	: $(window).height(),
+											top		: 0
+										}, 400, function() {
+										
+											var $this	= $(this);
+											$this.find('span.ib-preview-descr, span.ib-close').show()
+											if( imgItemsCount > 1 )
+												$this.find('div.ib-nav').show();
+												
+											if( callback ) callback.call();
+										
+										});
+									
+									});
+									
+									if( !hasImgPreview )
+										initImgPreviewEvents();
+									
+								} );
+								
+							},
+							// opens one content item (fullscreen)
+							loadContentItem				= function( $item, callback ) {
+								
+								var hasContentPreview	= ( $('#ib-content-preview').length > 0 ),
+									teaser				= $item.children('div.ib-teaser').html(),
+									content				= $item.children('div.ib-content-full').html(),
+									contentData			= {
+										teaser		: teaser,
+										content		: content
+									};
+									
+								if( !hasContentPreview )
+									$('#contentTmpl').tmpl( contentData ).insertAfter( $ibWrapper );
+									
+								//set the returned values and show/animate preview
+								$('#ib-content-preview').css({
+									width	: $item.width(),
+									height	: $item.height(),
+									left	: $item.offset().left,
+									top		: $item.offset().top
+								}).show().animate({
+									width	: $(window).width(),
+									left	: 0
+								}, 500, 'easeOutExpo', function() {
+								
+									$(this).animate({
+										height	: $(window).height(),
+										top		: 0
+									}, 400, function() {
+										
+										var $this	= $(this),
+											$teaser	= $this.find('div.ib-teaser'),
+											$content= $this.find('div.ib-content-full'),
+											$close	= $this.find('span.ib-close');
+											
+										if( hasContentPreview ) {
+											$teaser.html( teaser )
+											$content.html( content )
+										}
+									
+										$teaser.show();
+										$content.show();
+										$close.show();
+										
+										if( callback ) callback.call();
+									
+									});
+								
+								});
+								
+								if( !hasContentPreview )
+									initContentPreviewEvents();	
+								
+							},
+							// preloads an image
+							preloadImage				= function( src, callback ) {
+							
+								$('<img/>').load(function(){
+								
+									if( callback ) callback.call();
+								
+								}).attr( 'src', src );
+							
+							},
+							// load the events for the image preview : navigation ,close button, and window resize
+							initImgPreviewEvents		= function() {
+							
+								var $preview	= $('#ib-img-preview');
+								
+								$preview.find('span.ib-nav-prev').bind('click.ibTemplate', function( event ) {
+									
+									navigate( 'prev' );
+									
+								}).end().find('span.ib-nav-next').bind('click.ibTemplate', function( event ) {
+									
+									navigate( 'next' );
+									
+								}).end().find('span.ib-close').bind('click.ibTemplate', function( event ) {
+									
+									closeImgPreview();
+									
+								});
+								
+								//resizing the window resizes the preview image
+								$(window).bind('resize.ibTemplate', function( event ) {
+									
+									var $largeImg	= $preview.children('img.ib-preview-img'),
+										dim			= getImageDim( $largeImg.attr('src') );
+									
+									$largeImg.css({
+										width	: dim.width,
+										height	: dim.height,
+										left	: dim.left,
+										top		: dim.top
+									})
+									
+								});
+								
+							},
+							// load the events for the content preview : close button
+							initContentPreviewEvents	= function() {
+							
+								$('#ib-content-preview').find('span.ib-close').bind('click.ibTemplate', function( event ) {
+									
+									closeContentPreview();
+									
+								});
+								
+							},
+							// navigate the image items in fullscreen mode
+							navigate					= function( dir ) {
+								
+								if( isAnimating ) return false;
+								
+								isAnimating		= true;
+								
+								var $preview	= $('#ib-img-preview'),
+									$loading	= $preview.find('div.ib-loading-large');
+								
+								$loading.show();
+								
+								if( dir === 'next' ) {
+									
+									( current === imgItemsCount - 1 ) ? current	= 0 : ++current;
+									
+								}
+								else if( dir === 'prev' ) {
+									
+									( current === 0 ) ? current	= imgItemsCount - 1 : --current;
+									
+								}
+								
+								var $item		= $ibImgItems.eq( current ),
+									largeSrc	= $item.children('img').data('largesrc'),
+									description	= $item.children('span').text();
+									
+								preloadImage( largeSrc, function() {
+									
+									$loading.hide();
+									
+									//get dimentions for the image, based on the windows size
+									var	dim	= getImageDim( largeSrc );
+									
+									$preview.children('img.ib-preview-img')
+												    .attr( 'src', largeSrc )
+													.css({
+										width	: dim.width,
+										height	: dim.height,
+										left	: dim.left,
+										top		: dim.top
+													})
+													.end()
+													.find('span.ib-preview-descr')
+													.text( description );
+									
+									$ibWrapper.scrollTop( $item.offset().top )
+											  .scrollLeft( $item.offset().left );
+									
+									isAnimating	= false;
+									
+								});
+								
+							},
+							// closes the fullscreen image item
+							closeImgPreview				= function() {
+							
+								if( isAnimating ) return false;
+								
+								isAnimating	= true;
+								
+								var $item	= $ibImgItems.eq( current );
+								
+								$('#ib-img-preview').find('span.ib-preview-descr, div.ib-nav, span.ib-close')
+												.hide()
+												.end()
+												.animate({
+													height	: $item.height(),
+													top		: $item.offset().top
+													}, 500, 'easeOutExpo', function() {
+													
+													$(this).animate({
+														width	: $item.width(),
+														left	: $item.offset().left
+														}, 400, function() {
+														
+															$(this).fadeOut(function() {isAnimating	= false;});
+														
+													} );
+												
+												});
+							
+							},
+							// closes the fullscreen content item
+							closeContentPreview			= function() {
+								
+								if( isAnimating ) return false;
+								
+								isAnimating	= true;
+								
+								var $item	= $ibItems.not('.ib-image').eq( current );
+								
+								$('#ib-content-preview').find('div.ib-teaser, div.ib-content-full, span.ib-close')
+														.hide()
+														.end()
+														.animate({
+															height	: $item.height(),
+															top		: $item.offset().top
+														}, 500, 'easeOutExpo', function() {
+															
+															$(this).animate({
+																width	: $item.width(),
+																left	: $item.offset().left
+															}, 400, function() {
+																
+																$(this).fadeOut(function() {isAnimating	= false;});
+																
+															} );
+														
+														});
+							
+							},
+							// get the size of one image to make it full size and centered
+							getImageDim					= function( src ) {
+								
+								var img     	= new Image();
+								img.src     	= src;
+								
+								var w_w	= $(window).width(),
+									w_h	= $(window).height(),
+									r_w	= w_h / w_w,
+									i_w	= img.width,
+									i_h	= img.height,
+									r_i	= i_h / i_w,
+									new_w, new_h,
+									new_left, new_top;
+								
+								if( r_w > r_i ) {
+								
+									new_h	= w_h;
+									new_w	= w_h / r_i;
+								
+								}	
+								else {
+								
+									new_h	= w_w * r_i;
+									new_w	= w_w;
+								
+								}
+								
+								return {
+									width	: new_w,
+									height	: new_h,
+									left	: (w_w - new_w) / 2,
+									top		: (w_h - new_h) / 2
+								};
+							
+							};
+						
+						return { init : init };
+						
+					})();
+				
+				Template.init();
+				
+            });
+        </script>
+    </body>
+</html>	
