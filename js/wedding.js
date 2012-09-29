@@ -6,6 +6,8 @@ $(function () {
 
             // current index of the opened item
             current = -1,
+                contentPreviewing = false,
+                imgPreviewing = false,
                 // true if the item is being opened / closed
                 isAnimating = false,
                 // items on the grid
@@ -15,7 +17,12 @@ $(function () {
                 // total image items on the grid
                 imgItemsCount = $ibImgItems.length,
                 init = function () {
-
+                    $('.navbar').on('activate', function (e) {
+                        if (contentPreviewing)
+                            closeContentPreview();
+                        if (imgPreviewing)
+                            closeImgPreview();
+                    })
                     // add a class ib-image to the image items
                     $ibImgItems.addClass('ib-image');
                     // load some events
@@ -39,7 +46,7 @@ $(function () {
 
                     if (isAnimating) return false;
                     $('html, body').animate({
-                        scrollTop: 0
+                        scrollTop:0
                     }, 500);
                     // if content item
                     if ($item.hasClass('ib-content')) {
@@ -75,6 +82,8 @@ $(function () {
 
                     // preload large image
                     $item.addClass('ib-loading');
+
+                    imgPreviewing = true;
 
                     preloadImage(largeSrc, function () {
 
@@ -148,6 +157,7 @@ $(function () {
                     if (!hasContentPreview)
                         $('#contentTmpl').tmpl(contentData).insertAfter($ibWrapper);
 
+                    contentPreviewing = true;
                     //set the returned values and show/animate preview
                     $('#ib-content-preview').css({
                         width:$item.width(),
@@ -212,17 +222,11 @@ $(function () {
                     });
 
                     $preview.find('span.ib-nav-prev').bind('click.ibTemplate',function (event) {
-
                         navigate('prev');
-
                     }).end().find('span.ib-nav-next').bind('click.ibTemplate',function (event) {
-
                             navigate('next');
-
                         }).end().find('span.ib-close').bind('click.ibTemplate', function (event) {
-
                             closeImgPreview();
-
                         });
 
                     //resizing the window resizes the preview image
@@ -331,7 +335,7 @@ $(function () {
                             });
 
                         });
-
+                    imgPreviewing = false;
                 },
                 // closes the fullscreen content item
                 closeContentPreview = function () {
@@ -362,7 +366,7 @@ $(function () {
                             });
 
                         });
-
+                    contentPreviewing = false;
                 },
                 // get the size of one image to make it full size and centered
                 getImageDim = function (src) {
