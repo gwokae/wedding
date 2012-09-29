@@ -1,15 +1,15 @@
 @import url('reset.css');
-body{
+.ib-container{
     background: #fff;
     color: #fff;
     font-family: 'Oswald', sans-serif;
     font-size: 13px;
     text-transform: uppercase;
-	overflow: hidden;
+    overflow: hidden;
 }
 a{
-    color: #ddd;
-    text-decoration: none;
+    color: #ddd !important;
+    text-decoration: none !important;
 }
 .clr{
     clear: both;
@@ -70,10 +70,6 @@ a{
     margin-top: 40px;
     outline: none;
     /*height dynamic*/
-}
-.ib-main{
-    position: relative;
-    width: 2546px;
 }
 .ib-main a{
     float: left;
@@ -201,7 +197,7 @@ a{
 .ib-preview{
     overflow: hidden;
     position: absolute;
-    top: 40px;
+    top: 0px;
     display: none;
 }
 .ib-preview-descr{
@@ -239,14 +235,14 @@ a{
     right: auto;
 }
 .ib-close{
-	top: 7px;
+	top: 47px;
 	right: 7px;
-	background: transparent url(../images/close.png) no-repeat center center;
+	background: #fff url(../images/close.png) no-repeat center center;
 	position: absolute;
 	width: 24px;
 	height: 24px;
 	cursor: pointer;
-	opacity: 0.2;
+	opacity: 0.6;
 	z-index: 999;
     text-indent: -9000px;
 }
