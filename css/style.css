@@ -2,18 +2,20 @@ body {
     position: relative;
     padding-top: 40px;
     font-family: "微軟正黑體", "Microsoft JhengHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    overflow-x:hidden;
 }
-
-.ib-container {
+#brand{
+    color: #ffffff;
+    float: left;
+}
+.ib-main-wrapper{
+    width: 115%;
+}
+.ib-main {
     background: #fff;
     color: #fff;
     text-transform: uppercase;
     overflow: hidden;
-}
-
-.ib-container   a {
-    color: #ddd !important;
-    text-decoration: none !important;
 }
 
 .clr {
@@ -21,6 +23,8 @@ body {
 }
 
 .ib-main a {
+    color: #ddd;
+    text-decoration: none;
     float: left;
     width: 210px;
     height: 210px;
