@@ -78,7 +78,6 @@ a{
     position: relative;
     overflow: hidden;
     margin: 0px 0px 2px 2px;
-    cursor: move;
     background: #fff url(../images/thumb_bg.jpg) no-repeat center center;
     background-size: 110% 110%;
     -webkit-transition: all 0.2s ease-in-out;
