@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-tw">
 <head>
-    <title>MIKI & TERRY'S WEDDING</title>
+    <title>TERRY & MIKI'S WEDDING</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -50,7 +50,18 @@
         <ul class="nav">
             <li class="active"><a href="#top"><i class="icon-chevron-right"></i> 婚禮資訊</a></li>
             <li><a href="#invitation"><i class="icon-chevron-right"></i> 我要參加</a></li>
-            <li><a href="#map"><i class="icon-chevron-right"></i> 婚宴場地地圖</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle"
+                   data-toggle="dropdown"
+                   href="#"><i class="icon-map-marker"></i> 交通資訊
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#car">開車</a></li>
+                    <li><a href="#train">火車</a></li>
+                    <li><a href="#bus">公車</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>
@@ -150,15 +161,49 @@
                 <h1>我要參加</h1>
             </div>
             <iframe src="https://docs.google.com/spreadsheet/embeddedform?formkey=dGRHbWVjeXA3YW9Wb0g2ck5POWZieUE6MQ"
-                    width="100%" height="1700" frameborder="0" marginheight="0" marginwidth="0">Loading...
+                    width="100%" height="1400" frameborder="0" marginheight="0" marginwidth="0">Loading...
             </iframe>
         </section>
-        <section id="map">
-            <div class="page-header">
-                <h1>婚宴場地</h1>
+        <section>
+            <div class="page-header" id="car">
+                <h1>交通資訊</h1>
             </div>
+            <h2>開車</h2>
+            <ol>
+                <li>
+                    由國道1—南崁交流道下，循省道4號春日路右轉南平路直行至中正路口即達(約2公里)
+                </li>
+                <li>
+                    由國道2下，循大興西路左轉中正路即達(約2公里)
+                </li>
+                <li>
+                    停車場位置
+                </li>
+            </ol>
             <iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
                     src="https://maps.google.com.tw/maps?q=%E6%A1%83%E5%9C%92%E5%B8%82%E4%B8%AD%E6%AD%A3%E8%B7%AF1047%E8%99%9F&amp;hl=zh-TW&amp;ie=UTF8&amp;safe=off&amp;hnear=330%E6%A1%83%E5%9C%92%E7%B8%A3%E6%A1%83%E5%9C%92%E5%B8%82%E4%B8%AD%E6%AD%A3%E8%B7%AF1047%E8%99%9F&amp;gl=tw&amp;t=m&amp;brcurrent=3,0x3442a0711b0a7421:0x35832a6e5ed1e1ae,0,0x34683d0eceda863f:0x54e44f52583a486a&amp;hq=&amp;ll=25.015462,121.298676&amp;spn=0.046668,0.068579&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe>
+
+            <h2 id="train">火車</h2>
+            <ul>
+                <li>坐台鐵(不建議搭乘高鐵)
+                    到總站下車後轉計程車(車資200內可達)
+                    桃園市有跳錶，可提醒司機
+                </li>
+                <li> 火車站搭公車
+                    桃園火車站前站於中正路直行左轉中華路，至統領百貨前搭乘桃園客運151或152，中正藝文特區站下車即達，步行 分鐘
+                </li>
+            </ul>
+            <h2 id="bus">公車</h2>
+            <ul>
+                <li>乘坐<a href="http://www.tybus.com.tw/default.aspx?page=BusTime" target="_blank">桃園客運/台北客運聯營</a>於藝文特區站下車步行約5分鐘
+                    <img src="http://www.tybus.com.tw/images/path/1520.jpg">
+                </li>
+                <li>乘坐<a href="http://www.chunglibus.com.tw/route/9009.html" target="_blank">中壢客運/指南客運聯營</a>
+                    到總站下車轉計程車(車資200內可達)
+                </li>
+            </ul>
+
+
         </section>
     </div>
 </div>
