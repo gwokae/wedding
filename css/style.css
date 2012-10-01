@@ -11,7 +11,8 @@ body {
 }
 
 .ib-main-wrapper {
-    width: 115%;
+    width: 110%;
+    margin: auto 0 ;
 }
 
 .ib-main {
